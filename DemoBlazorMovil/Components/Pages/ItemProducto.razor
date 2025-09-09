@@ -3,6 +3,7 @@
 @using DemoBlazorMovil.Services
 @inject NavigationManager navigationManager
 @inject ProductoService productoService
+
 <h3>
     @if (id == "0")
     {
@@ -16,16 +17,16 @@
 
 <EditForm OnValidSubmit="@Grabar" Model="@producto">
     <div class="mt-3">
-        <InputText @bind-Value="@producto.Nombre" placeholder="Nombre" />
+        <InputText @bind-Value="producto.Nombre" placeholder="Nombre" />
     </div>
     <div class="mt-3">
-        <InputNumber @bind-Value="@producto.Precio" placeholder="Precio" />
+        <InputNumber @bind-Value="producto.Precio" placeholder="Precio" />
     </div>
     <div class="mt-3">
-        <InputText @bind-Value="@producto.Descripcion" placeholder="Descripcion" />
+        <InputText @bind-Value="producto.Descripcion" placeholder="Descripcion" />
     </div>
     <div class="mt-3">
-        <InputNumber @bind-Value="@producto.Stock" placeholder="Stock" />
+        <InputNumber @bind-Value="producto.Stock" placeholder="Stock" />
     </div>
     <div class="mt-3">
         <img src="@producto.Imagen" alt="Imagen del producto" style="width: 100px; height: 100px;" />
@@ -43,9 +44,9 @@
     [Parameter]
     public string id { get; set; }
 
-    public Producto producto;
+    public Producto producto { get; set; }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         try
         {
@@ -55,7 +56,7 @@
             }
             else
             {
-                producto = productoService.GetProducto(int.Parse(id));
+                producto = await productoService.GetProductoByIdAsync(int.Parse(id));
             }
         }
         catch (Exception ex)
@@ -73,7 +74,7 @@
 
     public async Task Grabar()
     {
-        productoService.AddProducto(producto);
+        //productoService.AddProducto(producto);
         navigationManager.NavigateTo("/productos");
     }
 }

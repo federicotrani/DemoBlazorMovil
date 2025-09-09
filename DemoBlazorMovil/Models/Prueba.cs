@@ -1,5 +1,4 @@
-﻿
-public class Rootobject
+﻿public class Rootobject
 {
     public int id { get; set; }
     public string title { get; set; }

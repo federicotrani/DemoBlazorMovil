@@ -1,0 +1,14 @@
+@DemoBlazorMovil.API_HostAddress = https://localhost:7188
+
+
+
+GET {{DemoBlazorMovil.API_HostAddress}}/api/productos
+Accept: application/json
+###
+
+
+
+@id=15
+GET {{DemoBlazorMovil.API_HostAddress}}/api/productos/{{id}}
+
+###
