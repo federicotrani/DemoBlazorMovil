@@ -1,6 +1,6 @@
 ﻿using DemoBlazorMovil.Shared.Models;
 
-namespace DemoBlazorMovil.API.Repositories;
+namespace DemoBlazorMovil.API.Repositories.Contrato;
 
 public interface IProductoRepository
 {

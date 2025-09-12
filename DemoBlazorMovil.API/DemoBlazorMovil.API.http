@@ -1,14 +1,25 @@
-@DemoBlazorMovil.API_HostAddress = https://localhost:7188
+@API_HostAddress = https://localhost:7188
 
 
 
-GET {{DemoBlazorMovil.API_HostAddress}}/api/productos
+GET {{API_HostAddress}}/api/productos
 Accept: application/json
 ###
 
 
 
-@id=15
-GET {{DemoBlazorMovil.API_HostAddress}}/api/productos/{{id}}
+@id=1
+GET {{API_HostAddress}}/api/productos/{{id}}
+Content-Type: application/json
+
+###
+
+POST {{API_HostAddress}}/api/usuarios/Authenticate
+Content-Type: application/json
+
+{
+  "email": "luis@gmail.com",
+  "password": "1234"
+}
 
 ###
