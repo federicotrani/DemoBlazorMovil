@@ -1,10 +1,11 @@
 ﻿using DemoBlazorMovil.Models;
+using DemoBlazorMovil.Services.Contrato;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
-namespace DemoBlazorMovil.Services;
+namespace DemoBlazorMovil.Services.Implementa;
 
-public class ProductoService
+public class ProductoService : IProductoService
 {
     private readonly HttpClient _httpClient;
 
@@ -34,7 +35,7 @@ public class ProductoService
 
 
 
-    public async Task<List<Producto>> GetProductosAsync()
+    public async Task<List<Producto>> GetAllAsync()
     {
         try
         {
@@ -48,7 +49,7 @@ public class ProductoService
         
     }
 
-    public async Task<Producto> GetProductoByIdAsync(int id)
+    public async Task<Producto> GetByIdAsync(int id)
     {
         try
         {
@@ -56,7 +57,8 @@ public class ProductoService
         }
         catch (Exception ex)
         {
-            throw new Exception();
+            
+            throw;
         }
 
     }

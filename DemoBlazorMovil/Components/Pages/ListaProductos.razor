@@ -1,7 +1,10 @@
 ﻿@page "/productos"
 @using DemoBlazorMovil.Models
 @using DemoBlazorMovil.Services
-@inject ProductoService productoService
+@using DemoBlazorMovil.Services.Contrato
+@using DemoBlazorMovil.Services.Implementa
+
+@inject IProductoService productoService
 @inject NavigationManager navigationManager
 @inject AlertaService alertaService
 
@@ -59,7 +62,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        listaProductos = await productoService.GetProductosAsync();
+        listaProductos = await productoService.GetAllAsync();
     }
 
     private void EditarProducto(Producto producto)

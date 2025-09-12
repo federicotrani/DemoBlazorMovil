@@ -1,6 +1,7 @@
 ﻿@page "/producto/{id}"
 @using DemoBlazorMovil.Models
 @using DemoBlazorMovil.Services
+@using DemoBlazorMovil.Services.Implementa
 @inject NavigationManager navigationManager
 @inject ProductoService productoService
 
@@ -56,7 +57,7 @@
             }
             else
             {
-                producto = await productoService.GetProductoByIdAsync(int.Parse(id));
+                producto = await productoService.GetByIdAsync(int.Parse(id));
             }
         }
         catch (Exception ex)

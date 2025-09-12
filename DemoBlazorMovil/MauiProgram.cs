@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DemoBlazorMovil.Services.Contrato;
+using DemoBlazorMovil.Services.Implementa;
+using Microsoft.Extensions.Logging;
 
 namespace DemoBlazorMovil
 {
@@ -27,10 +29,11 @@ namespace DemoBlazorMovil
                 };
             });
 
-            builder.Services.AddScoped<Services.ProductoService>();
+            // builder.Services.AddScoped<Services.ProductoService>();
             builder.Services.AddScoped<Services.AlertaService>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            builder.Services.AddScoped<IProductoService, ProductoService>();
 
-            
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();

@@ -1,12 +1,17 @@
 ﻿@layout LoginLayout
 @page "/login"
 @page "/"
+
 @using DemoBlazorMovil.Services
+@using DemoBlazorMovil.Services.Contrato
+@using DemoBlazorMovil.Shared.DTO
 @using Microsoft.AspNetCore.Components.Forms
 @using DemoBlazorMovil.Models
 @using System.ComponentModel.DataAnnotations
+
 @inject NavigationManager navigation
 @inject AlertaService alertaService
+@inject IUsuarioService usuarioService
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -14,6 +19,16 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Iniciar sesión</h3>
+
+                    @if (isLoading)
+                    {
+                        <div class="text-center mb-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <span class="ms-2">Cargando...</span>
+                        </div>
+                    }
 
                     <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
                         <DataAnnotationsValidator />
@@ -41,13 +56,21 @@
 
 @code {
     private LoginModel loginModel = new();
+    private bool isLoading = false;
 
     private async Task HandleLogin()
     {
-        // Acá iría la lógica de autenticación
-        // Console.WriteLine($"Email: {loginModel.Email}, Password: {loginModel.Password}");
+        var login = new LoginDTO() {
+            Email = loginModel.Email,
+            Password = loginModel.Password
+        };
 
-        if (loginModel.Email.Equals("usuario@ites.edu.ar") && loginModel.Password.Equals("1234"))
+        isLoading = true;
+        var result = await usuarioService.AuthenticateAsync(login);
+
+        isLoading = false;
+
+        if (result != null)
         {
             // Redirigir a la página principal
             navigation.NavigateTo("/productos");
